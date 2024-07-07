@@ -1,0 +1,209 @@
+<!DOCTYPE html>
+<html lang="en">
+    <head>
+        <meta charset="UTF-8">
+        <meta name="viewport" content="width=device-width, initial-scale=1.0">
+        <title>Image Gallery | AR Assignments</title>
+        <link rel="shortcut icon" href="images/logo.png">
+        <link rel="stylesheet" href="style.css">
+        <link rel="stylesheet" href="css/default.css">
+    </head>
+    <body>
+        <div class="wrapper">
+            <div class="loadingContainer"></div>
+        </div>
+        <div class="container">
+            <marquee>Image Gallery</marquee>
+            <div class="group">
+                <div class="inputGroup">
+                    <section>
+                        <h2 class="title">Interactive Image Gallery</h2>
+                        <div class="galleryContainer">
+                            <div class="col">
+                                <div class="galleryCard shadow">
+                                    <img src="images/card/1.jpg" alt="Toronto Exhibition">
+                                    <div class="content">
+                                        <h3>Mountain Lake</h3>
+                                        <p>Mountain lakes are captivating natural wonders nestled amidst breathtaking landscapes. </p>
+                                    </div>
+                                </div>
+                            </div>
+                            <div class="col">
+                                <div class="galleryCard shadow">
+                                    <img src="images/card/2.jpg" alt="Toronto Exhibition">
+                                    <div class="content">
+                                        <h3>Rose Petals</h3>
+                                        <p>The rose is a symbol of love, beauty, and romance for centuries in cultures around the world. </p>
+                                    </div>
+                                </div>
+                            </div>
+                            <div class="col">
+                                <div class="galleryCard shadow">
+                                    <img src="images/card/3.jpg" alt="Toronto Exhibition">
+                                    <div class="content">
+                                        <h3>Mountain climbing</h3>
+                                        <p>Mountain climbing is a challenging yet outdoor activity that involves ascending steep slopes.</p>
+                                    </div>
+                                </div>
+                            </div>
+                            <div class="col">
+                                <div class="galleryCard shadow">
+                                    <img src="images/card/4.jpg" alt="Toronto Exhibition">
+                                    <div class="content">
+                                        <h3>Blue Lake</h3>
+                                        <p>This natural wonder typically features crystal-clear waters reflecting striking shades of blue.</p>
+                                    </div>
+                                </div>
+                            </div>
+                            <div class="col">
+                                <div class="galleryCard shadow">
+                                    <img src="images/card/5.jpg" alt="Toronto Exhibition">
+                                    <div class="content">
+                                        <h3>Cold Mountains</h3>
+                                        <p>The cold mountains, the air is crisp and clean, carrying the scent of pine and the chill of frost.</p>
+                                    </div>
+                                </div>
+                            </div>
+                            <div class="col">
+                                <div class="galleryCard shadow">
+                                    <img src="images/card/6.jpg" alt="Toronto Exhibition">
+                                    <div class="content">
+                                        <h3>Beach Tree</h3>
+                                        <p>One of the most iconic beach trees is the palm tree, which is commonly associated with tropical beaches.</p>
+                                    </div>
+                                </div>
+                            </div>
+                            <div class="col">
+                                <div class="galleryCard shadow">
+                                    <img src="images/card/7.jpg" alt="Toronto Exhibition">
+                                    <div class="content">
+                                        <h3>Glowing Sky</h3>
+                                        <p>The phenomenon of a glowing sky captivates our senses, inviting us to gaze upon its mesmerizing beauty.</p>
+                                    </div>
+                                </div>
+                            </div>
+                            <div class="col">
+                                <div class="galleryCard shadow">
+                                    <img src="images/card/8.jpg" alt="Toronto Exhibition">
+                                    <div class="content">
+                                        <h3>Pink Buildings</h3>
+                                        <p>In architectural design, pink buildings can be found in a variety of styles from traditional to contemporary.</p>
+                                    </div>
+                                </div>
+                            </div>
+                            <div class="col">
+                                <div class="galleryCard shadow">
+                                    <img src="images/card/9.jpg" alt="Toronto Exhibition">
+                                    <div class="content">
+                                        <h3>Red Mushroom</h3>
+                                        <p>In various traditions, the red mushroom symbolizes different concepts and holds diverse meanings.</p>
+                                    </div>
+                                </div>
+                            </div>
+                        </div>
+                    </section>
+                </div>
+            </div>
+        </div>
+
+        <div class="lightbox">
+            <div class="lightboxTop">
+                <div class="slideCount">
+                    <span id="currentGalleryCount">3</span>/<span id="totalGalleryCount">3</span>
+                </div>
+                <span onclick="closeLightBox()" class="lightboxCloseBtn"><i class="bi bi-x"></i></span>
+            </div>
+            <img src="images/card/1.jpg" alt="lightboxImage" class="lightboxImage">
+            <div class="thumbnail">
+            </div>
+            <h1 class="lightboxTitle"></h1>
+            <div class="lightboxNavigator left" onclick="prevImage()">
+                <i class="fa-solid fa-angle-left"></i>
+            </div>
+            <div class="lightboxNavigator right" onclick="nextImage()">
+                <i class="fa-solid fa-angle-right"></i>
+            </div>
+        </div>
+    </body>
+    <script src="js/sweetalert2.min.js"></script>
+    <script>
+
+        // Get All Gallery Cards
+        let galleryCardAll = document.querySelectorAll(".galleryContainer .col");
+        let currentGalleryCount = 1;
+        // Total number of gallery cards set
+        document.querySelector("#totalGalleryCount").innerHTML = galleryCardAll.length;
+
+        // Add onclick listener on each gallery card and add thubnail from gallery card
+        galleryCardAll.forEach((item, index)=>{
+            item.onclick = ()=>{
+                showImage(index+1);
+            }
+            document.querySelector(".lightbox .thumbnail").innerHTML += `
+                <img src="${
+                    item.querySelector(".galleryCard img").src
+                }" alt="" onclick="showImage(${index+1})">
+            `;
+        });
+        
+        // Show Lightbox when gallery card clicked
+        function showImage(indexNo){
+            let lightboxImage = document.querySelector(".lightbox .lightboxImage");
+            let lightboxTitle = document.querySelector(".lightbox .lightboxTitle");
+
+            // Add fade-out animation class
+            lightboxImage.classList.remove("fade");
+            void lightboxImage.offsetWidth; // Trigger reflow to restart animation
+            lightboxImage.classList.add("fade");
+            
+            lightboxTitle.classList.remove("show");
+            void lightboxTitle.offsetWidth; // Trigger reflow to restart animation
+            lightboxTitle.classList.add("show");
+
+            // Set image source
+            lightboxImage.src = galleryCardAll[indexNo-1].querySelector(".galleryCard img").src;
+            lightboxTitle.innerHTML = galleryCardAll[indexNo-1].querySelector(".galleryCard h3").innerHTML;
+
+            document.querySelectorAll(".lightbox .thumbnail img").forEach((thumbnail, index) => {
+                if (index+1 === indexNo) {
+                    thumbnail.classList.add("active");
+                } else {
+                    thumbnail.classList.remove("active");
+                }
+            });
+
+            // Update current gallery count
+            currentGalleryCount = indexNo;
+            document.querySelector("#currentGalleryCount").innerHTML = currentGalleryCount;
+
+            // Open lightbox
+            document.querySelector(".lightbox").classList.add("open");
+        }
+        
+        // Close lightbox
+        function closeLightBox(){
+            document.querySelector(".lightbox").classList.remove("open");
+        }
+
+        // Next lightbox item select
+        function nextImage(){
+            if(currentGalleryCount < galleryCardAll.length){
+                currentGalleryCount++;
+            } else {
+                currentGalleryCount = 1;
+            }
+            showImage(currentGalleryCount);
+        }
+        
+        // Previous lightbox item select
+        function prevImage(){
+            if(currentGalleryCount == 1){
+                currentGalleryCount = galleryCardAll.length;
+            } else {
+                currentGalleryCount--;
+            }
+            showImage(currentGalleryCount);
+        }
+        
+    </script>
+</html>
