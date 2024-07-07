@@ -1,2 +1,2 @@
-![Screenshot 2024-07-08 041425](https://github.com/ARassignments/Image-Gallery-Web/assets/49037725/612a3461-885c-4739-ad75-5bb20f2fc2fa)
-![Screenshot 2024-07-08 041238](https://github.com/ARassignments/Image-Gallery-Web/assets/49037725/66aee7b2-4777-4682-bc36-2640990d925b)
+![Screenshot 2024-07-08 041238](https://github.com/ARassignments/Image-Gallery-Web/assets/49037725/e7d921e2-1575-40be-a388-036bfaf07493)
+![Screenshot 2024-07-08 041425](https://github.com/ARassignments/Image-Gallery-Web/assets/49037725/4bdbfa62-91e1-4778-ac9a-ba28c002b35d)
